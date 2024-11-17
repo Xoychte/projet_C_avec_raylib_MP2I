@@ -1,14 +1,26 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "raylib.h"
 
-int* initialize_screen(int, int);
-int read_pixel(int*,int,int,int);
+struct DoubleBuffer* initialize_screen(int, int);
+int read_pixel(int*,int,int,int,int);
 void write_pixel(int*,int,int,int,int);
-void print_screen(int*,int,int);
-void compute_buffer(int*,int*,int,int);
-void transpose_buffer(int*,int*,int,int);
+void print_screen(struct DoubleBuffer*,int,int,Color*);
+void compute_buffer(struct DoubleBuffer*,int,int);
+void swap_buffers(struct DoubleBuffer*);
+Color* read_colormap(int);
+
+typedef struct DoubleBuffer {
+    int *front_buffer;
+    int *back_buffer;
+    int width;
+    int height;
+} DoubleBuffer;
+
+
 
 int main(void)
 {
@@ -21,98 +33,161 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "test");
     SetWindowIcon(icon);
-    SetTargetFPS(10);               // Set our game to run at 60 frames-per-second
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 
-    int* screen = initialize_screen(screenWidth, screenHeight);
-    int* buffer = initialize_screen(screenWidth, screenHeight);
+    DoubleBuffer* db = initialize_screen(screenWidth, screenHeight);
+    Color* colormap = read_colormap(256);
     //--------------------------------------------------------------------------------------
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
     //---------------------Updating variables---------------
-        compute_buffer(screen, buffer, screenWidth, screenHeight);
-        transpose_buffer(screen, buffer, screenWidth, screenHeight);
+        compute_buffer(db, screenWidth, screenHeight);
+
+        swap_buffers(db);
 
         //--------------------Drawing----------------------
         BeginDrawing();
 
-            print_screen(screen, screenWidth, screenHeight);
+            print_screen(db, screenWidth, screenHeight,colormap);
             DrawFPS(10,10);
 
         EndDrawing();
 
+        //-----------------INPUTS-------------------------------
+        if (IsKeyDown(KEY_SPACE)) {
+            TakeScreenshot("test.png");
+        }
     }
 
     CloseWindow();
-
-    free(screen);
-    free(buffer);
+    free(colormap);
+    free(db);
     return 0;
 }
 
-int* initialize_screen(const int width, const int height) {
-    int* screen = (int*)malloc(width * height * sizeof(int));
+DoubleBuffer* initialize_screen(const int width, const int height) {
+    DoubleBuffer* db = (DoubleBuffer*)malloc(sizeof(DoubleBuffer));
 
-    if (screen == NULL) {
+    if (db == NULL) {
+        printf("malloc failed");
+        exit(EXIT_FAILURE);
+    }
+
+
+    db->front_buffer = malloc(sizeof(int) * width * height);
+    db->back_buffer = malloc(sizeof(int) * width * height);
+    db->width = width;
+    db->height = height;
+
+    if (db->front_buffer == NULL || db->back_buffer == NULL) {
+        free(db->front_buffer);
+        free(db->back_buffer);
+        free(db);
         printf("malloc failed");
         exit(EXIT_FAILURE);
     }
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            write_pixel(screen, width, x, y, rand() % 4);
+            write_pixel(db->front_buffer, width, x, y, rand() % 256);
         }
     }
-    return screen;
+
+    return db;
 
 }
 
-int read_pixel(int* screen,int width, int x, int y) {
-    return screen[y * width + x];
+int read_pixel(int* screen, const int width, const int height, const int x, const int y) {
+    int real_x = x, real_y = y;
+
+    if (x == -1) {
+        real_x = width -1;
+    }else if (x == width) {
+        real_x = 0;
+    }
+    if (y == -1) {
+        real_y = height - 1;
+    } else if (y == height) {
+        real_y = 0;
+    }
+
+    return screen[real_y * width + real_x];
 }
 
-void write_pixel(int* screen,const int width, const int x, const int y, const int value) {
-    screen[y * width + x] = value;
+void write_pixel(int* buffer,const int width, const int x, const int y, const int value) {
+    buffer[y * width + x] = value;
 }
 
-void print_screen(int* screen,const int width, const int height) {
+void print_screen(DoubleBuffer* db,const int width, const int height, Color* colormap) {
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            Color color;
-            int pixel = read_pixel(screen, width, x, y);
-            switch (pixel) {
-                case 0: color = RED; break;
-                case 1: color = BLUE; break;
-                case 2: color = GREEN; break;
-                case 3: color = YELLOW; break;
-                default: color = WHITE; break;
-            }
+            int pixel = read_pixel(db->front_buffer, width,height, x, y);
+            Color color = colormap[pixel];
             DrawPixel(x, y, color);
         }
     }
 }
 
-void compute_buffer(int* screen,int* buffer,const int width, const int height) {
+void compute_buffer(DoubleBuffer* db,const int width, const int height) {
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
 
-            int prev;
-            int prevx; int prevy;
+            int current = read_pixel(db->front_buffer, width,height, x, y);
 
-            if (x == 0) {prevx = width - 1;} else {prevx = x-1;}
-            if (y == 0) {prevy = height - 1;} else {prevy = y-1;}
+            int sum = 0;
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (!(i == 0 && j == 0) && (read_pixel(db->front_buffer, width,height,  x+i, y+j) == (current + 1)%256)) {
+                        sum ++;
+                    }
+                }
+            }
 
-            prev = read_pixel(screen, width, prevx, prevy);
-            buffer[y * width + x] = prev;
+
+            if (sum >= 1) {
+                db->back_buffer[y * width + x] = (current + 1) % 256;
+            } else {
+                db->back_buffer[y * width + x] = current;
+            }
         }
     }
 }
 
-void transpose_buffer(int* screen,int* buffer,const int width, const int height) {
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            screen[y * width + x] = buffer[y * width + x];
-        }
+void swap_buffers(DoubleBuffer *db) {
+    void *temp = db->front_buffer;
+    db->front_buffer = db->back_buffer;
+    db->back_buffer = temp;
+}
+
+Color* read_colormap(const int size) {
+    Color* colormap = (Color*)malloc(size * sizeof(Color));
+    if (colormap == NULL) {
+        printf("malloc failed");
+        exit(EXIT_FAILURE);
     }
+
+    FILE* file = fopen("C:\\Users\\gabri\\Desktop\\perlin\\assets\\colormap.txt", "r");
+
+    if (file == NULL) {
+        printf("fopen failed");
+        exit(EXIT_FAILURE);
+    }
+
+    int r,g,b;
+
+    for (int i = 0; i < size; i++) {
+        fscanf(file, "%d %d %d", &r, &g, &b);
+        colormap[i].r = r;
+        colormap[i].g = g;
+        colormap[i].b = b;
+        colormap[i].a = 255;
+
+    }
+
+    for (int i = 0; i < size; i++) {
+        printf("%d %d %d %d \n", colormap[i].r, colormap[i].g, colormap[i].b, i);
+    }
+    return colormap;
 }

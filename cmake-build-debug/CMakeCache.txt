@@ -656,21 +656,6 @@ OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
 OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
 //STRINGS property for variable: PLATFORM
 PLATFORM-STRINGS:INTERNAL=Desktop;Web;Android;Raspberry Pi;DRM
-//Support for compression API
-SUPPORT_COMPRESSION_API:INTERNAL=ON
-//Default font is loaded on window initialization to be available
-// for the user to render simple text. If enabled, uses external
-// module functions to load default raylib font (module: text)
-SUPPORT_DEFAULT_FONT:INTERNAL=ON
-//Allow automatic gif recording of current screen pressing CTRL+F12,
-// defined in KeyCallback()
-SUPPORT_GIF_RECORDING:INTERNAL=ON
-//Allow automatic screen capture of current screen pressing F12,
-// defined in KeyCallback()
-SUPPORT_SCREEN_CAPTURE:INTERNAL=ON
-//Setting a higher resolution can improve the accuracy of time-out
-// intervals in wait functions
-SUPPORT_WINMM_HIGHRES_TIMER:INTERNAL=ON
 //STRINGS property for variable: USE_EXTERNAL_GLFW
 USE_EXTERNAL_GLFW-STRINGS:INTERNAL=OFF;IF_POSSIBLE;ON
 //Have include xinput.h
