@@ -5,6 +5,9 @@
 
 #include "raylib.h"
 
+#define COLORMAP_SIZE 20
+
+
 struct DoubleBuffer* initialize_screen(int, int);
 int read_pixel(int*,int,int,int,int);
 void write_pixel(int*,int,int,int,int);
@@ -36,7 +39,7 @@ int main(void)
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 
     DoubleBuffer* db = initialize_screen(screenWidth, screenHeight);
-    Color* colormap = read_colormap(256);
+    Color* colormap = read_colormap(COLORMAP_SIZE);
     //--------------------------------------------------------------------------------------
 
     // Main game loop
@@ -91,7 +94,7 @@ DoubleBuffer* initialize_screen(const int width, const int height) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            write_pixel(db->front_buffer, width, x, y, rand() % 256);
+            write_pixel(db->front_buffer, width, x, y, rand() % COLORMAP_SIZE);
         }
     }
 
@@ -139,7 +142,7 @@ void compute_buffer(DoubleBuffer* db,const int width, const int height) {
             int sum = 0;
             for (int i = -1; i <= 1; i++) {
                 for (int j = -1; j <= 1; j++) {
-                    if (!(i == 0 && j == 0) && (read_pixel(db->front_buffer, width,height,  x+i, y+j) == (current + 1)%256)) {
+                    if (!(i == 0 && j == 0) && (read_pixel(db->front_buffer, width,height,  x+i, y+j) == (current + 1)%COLORMAP_SIZE)) {
                         sum ++;
                     }
                 }
@@ -147,7 +150,7 @@ void compute_buffer(DoubleBuffer* db,const int width, const int height) {
 
 
             if (sum >= 1) {
-                db->back_buffer[y * width + x] = (current + 1) % 256;
+                db->back_buffer[y * width + x] = (current + 1) % COLORMAP_SIZE;
             } else {
                 db->back_buffer[y * width + x] = current;
             }
