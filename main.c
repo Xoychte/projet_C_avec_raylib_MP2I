@@ -5,7 +5,8 @@
 
 #include "raylib.h"
 
-#define COLORMAP_SIZE 20
+#define COLORMAP_SIZE 256
+#define COLORMAP_RESTRICTION 6
 
 
 struct DoubleBuffer* initialize_screen(int, int);
@@ -15,6 +16,7 @@ void print_screen(struct DoubleBuffer*,int,int,Color*);
 void compute_buffer(struct DoubleBuffer*,int,int);
 void swap_buffers(struct DoubleBuffer*);
 Color* read_colormap(int);
+Color get_color(Color*,int);
 
 typedef struct DoubleBuffer {
     int *front_buffer;
@@ -40,27 +42,31 @@ int main(void)
 
     DoubleBuffer* db = initialize_screen(screenWidth, screenHeight);
     Color* colormap = read_colormap(COLORMAP_SIZE);
+    int paused = 0;
     //--------------------------------------------------------------------------------------
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
     //---------------------Updating variables---------------
-        compute_buffer(db, screenWidth, screenHeight);
-
-        swap_buffers(db);
+        if (!paused) {
+            compute_buffer(db, screenWidth, screenHeight);
+            swap_buffers(db);
+        }
 
         //--------------------Drawing----------------------
         BeginDrawing();
-
             print_screen(db, screenWidth, screenHeight,colormap);
+            if (paused == 1) {
+                DrawText("Paused!", 10, 30, 30, BLUE );
+            }
             DrawFPS(10,10);
 
         EndDrawing();
 
         //-----------------INPUTS-------------------------------
-        if (IsKeyDown(KEY_SPACE)) {
-            TakeScreenshot("test.png");
+        if (IsKeyPressed(KEY_SPACE)) {
+            paused = !paused;
         }
     }
 
@@ -94,7 +100,7 @@ DoubleBuffer* initialize_screen(const int width, const int height) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            write_pixel(db->front_buffer, width, x, y, rand() % COLORMAP_SIZE);
+            write_pixel(db->front_buffer, width, x, y, rand() % COLORMAP_RESTRICTION);
         }
     }
 
@@ -127,7 +133,7 @@ void print_screen(DoubleBuffer* db,const int width, const int height, Color* col
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             int pixel = read_pixel(db->front_buffer, width,height, x, y);
-            Color color = colormap[pixel];
+            Color color = get_color(colormap, pixel * (COLORMAP_SIZE/COLORMAP_RESTRICTION));
             DrawPixel(x, y, color);
         }
     }
@@ -142,15 +148,15 @@ void compute_buffer(DoubleBuffer* db,const int width, const int height) {
             int sum = 0;
             for (int i = -1; i <= 1; i++) {
                 for (int j = -1; j <= 1; j++) {
-                    if (!(i == 0 && j == 0) && (read_pixel(db->front_buffer, width,height,  x+i, y+j) == (current + 1)%COLORMAP_SIZE)) {
+                    if (!(i == 0 && j == 0) && (read_pixel(db->front_buffer, width,height,  x+i, y+j) == (current + 1)%COLORMAP_RESTRICTION)) {
                         sum ++;
                     }
                 }
             }
 
 
-            if (sum >= 1) {
-                db->back_buffer[y * width + x] = (current + 1) % COLORMAP_SIZE;
+            if (sum >= 3 /* && current < COLORMAP_RESTRICTION - 1 */) {
+                db->back_buffer[y * width + x] = (current + 1) % COLORMAP_RESTRICTION;
             } else {
                 db->back_buffer[y * width + x] = current;
             }
@@ -171,7 +177,7 @@ Color* read_colormap(const int size) {
         exit(EXIT_FAILURE);
     }
 
-    FILE* file = fopen("C:\\Users\\gabri\\Desktop\\perlin\\assets\\colormap.txt", "r");
+    FILE* file = fopen("C:\\Users\\gabri\\Desktop\\perlin\\assets\\fire_colormap.txt", "r");
 
     if (file == NULL) {
         printf("fopen failed");
@@ -193,4 +199,12 @@ Color* read_colormap(const int size) {
         printf("%d %d %d %d \n", colormap[i].r, colormap[i].g, colormap[i].b, i);
     }
     return colormap;
+}
+
+Color get_color (Color* colormap, int index) {
+    Color color = BLACK;
+    if (index >= 0 && index < COLORMAP_SIZE) {
+        color = colormap[index];
+    }
+    return color;
 }
