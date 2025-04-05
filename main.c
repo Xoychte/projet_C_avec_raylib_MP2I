@@ -3,10 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #include "raylib.h"
 
 #define COLORMAP_SIZE 256
-#define COLORMAP_RESTRICTION 6
+#define COLORMAP_RESTRICTION 256
+
 
 
 struct DoubleBuffer* initialize_screen(int, int);
@@ -17,6 +19,9 @@ void compute_buffer(struct DoubleBuffer*,int,int);
 void swap_buffers(struct DoubleBuffer*);
 Color* read_colormap(int);
 Color get_color(Color*,int);
+double rand_noise(int);
+double noise_2d(int,int);
+int noise_to_val(int,int,int);
 
 typedef struct DoubleBuffer {
     int *front_buffer;
@@ -30,9 +35,14 @@ typedef struct DoubleBuffer {
 int main(void)
 {
 
-    const int screenWidth = 1000;
-    const int screenHeight = 650;
 
+
+    const int screenWidth = 2000;
+    const int screenHeight = 1250;
+
+
+    const int gridHeight = 200;
+    const int gridWidth = 200;
     const Image icon = LoadImage("C:/Users/gabri/Desktop/perlin/assets/icon.png");
 
 
@@ -40,34 +50,63 @@ int main(void)
     SetWindowIcon(icon);
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 
-    DoubleBuffer* db = initialize_screen(screenWidth, screenHeight);
+    Camera camera = { 0 };
+    camera.position = (Vector3){ 100.0f, 300.0f, 100.0f };    // Camera position
+    camera.target = (Vector3){ 0.0f, 2.0f, 0.0f };      // Camera looking at point
+    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
+    camera.fovy = 60.0f;                                // Camera field-of-view Y
+    camera.projection = CAMERA_PERSPECTIVE;             // Camera projection type
+
+    int cameraMode = CAMERA_FIRST_PERSON;
+
+
+    DoubleBuffer* db = initialize_screen(gridWidth, gridHeight);
     Color* colormap = read_colormap(COLORMAP_SIZE);
+
+
+
+
     int paused = 0;
+
+
+    DisableCursor();
     //--------------------------------------------------------------------------------------
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-    //---------------------Updating variables---------------
-        if (!paused) {
-            compute_buffer(db, screenWidth, screenHeight);
-            swap_buffers(db);
+
+        //compute_buffer(db,gridWidth,gridHeight);
+        //swap_buffers(db);
+
+        if (IsKeyDown(KEY_SPACE)) {
+            camera.position.y+= 0.5f;
+            camera.target.y+= 0.5f;
+
         }
+        if (IsKeyDown(KEY_LEFT_SHIFT)) {
+            camera.position.y -= 0.5f;
+            camera.target.y -= 0.5f;
+        }
+        UpdateCamera(&camera, cameraMode);
 
-        //--------------------Drawing----------------------
+
+        //----------------------------------------------DRAWING-------------------------------------------------//
         BeginDrawing();
-            print_screen(db, screenWidth, screenHeight,colormap);
-            if (paused == 1) {
-                DrawText("Paused!", 10, 30, 30, BLUE );
-            }
-            DrawFPS(10,10);
+        DrawFPS(0, 0);
+        ClearBackground(RAYWHITE);
 
+        BeginMode3D(camera);
+
+
+
+        print_screen(db,gridWidth,gridWidth,colormap);
+
+
+
+        EndMode3D();
         EndDrawing();
 
-        //-----------------INPUTS-------------------------------
-        if (IsKeyPressed(KEY_SPACE)) {
-            paused = !paused;
-        }
     }
 
     CloseWindow();
@@ -100,7 +139,7 @@ DoubleBuffer* initialize_screen(const int width, const int height) {
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            write_pixel(db->front_buffer, width, x, y, rand() % COLORMAP_RESTRICTION);
+            write_pixel(db->front_buffer, width, x, y, noise_to_val(x,y,COLORMAP_RESTRICTION));
         }
     }
 
@@ -133,13 +172,18 @@ void print_screen(DoubleBuffer* db,const int width, const int height, Color* col
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             int pixel = read_pixel(db->front_buffer, width,height, x, y);
-            Color color = get_color(colormap, pixel * (COLORMAP_SIZE/COLORMAP_RESTRICTION));
+            Color color = get_color(colormap, pixel);
+            DrawCube((Vector3){x,pixel/2.0f,y}, 1.0f,(float)pixel,1.0f,color);
             DrawPixel(x, y, color);
         }
     }
 }
 
 void compute_buffer(DoubleBuffer* db,const int width, const int height) {
+    if (db->back_buffer == NULL || db->front_buffer == NULL) {
+        printf("Pointeur nul, comme toi\n");
+        exit(EXIT_FAILURE);
+    }
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
 
@@ -177,7 +221,7 @@ Color* read_colormap(const int size) {
         exit(EXIT_FAILURE);
     }
 
-    FILE* file = fopen("C:\\Users\\gabri\\Desktop\\perlin\\assets\\fire_colormap.txt", "r");
+    FILE* file = fopen("C:\\Users\\gabri\\Desktop\\perlin\\assets\\viridis_colormap.txt", "r");
 
     if (file == NULL) {
         printf("fopen failed");
@@ -195,16 +239,20 @@ Color* read_colormap(const int size) {
 
     }
 
+
+    /* Uncomment this to print colormap
     for (int i = 0; i < size; i++) {
         printf("%d %d %d %d \n", colormap[i].r, colormap[i].g, colormap[i].b, i);
     }
+    */
     return colormap;
 }
 
 Color get_color (Color* colormap, int index) {
     Color color = BLACK;
     if (index >= 0 && index < COLORMAP_SIZE) {
-        color = colormap[index];
+        color = colormap[index * (COLORMAP_SIZE/COLORMAP_RESTRICTION)];
     }
     return color;
 }
+

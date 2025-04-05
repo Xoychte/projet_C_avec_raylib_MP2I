@@ -50,3 +50,7 @@ if(MSVC)
 else()
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
 endif()
+
+if(WIN32)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DGLFW_USE_HYBRID_HPG")
+endif()

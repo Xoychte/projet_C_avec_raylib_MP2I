@@ -52,7 +52,7 @@ build cmake_object_order_depends_target_perlin: phony || cmake_object_order_depe
 build CMakeFiles/perlin.dir/main.c.obj: C_COMPILER__perlin_unscanned_Debug C$:/Users/gabri/Desktop/perlin/main.c || cmake_object_order_depends_target_perlin
   DEFINES = -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP
   DEP_FILE = CMakeFiles\perlin.dir\main.c.obj.d
-  FLAGS = -g -std=gnu99 -fdiagnostics-color=always -Wall -Wextra
+  FLAGS = -DGLFW_USE_HYBRID_HPG -g -std=gnu99 -fdiagnostics-color=always -Wall -Wextra
   INCLUDES = -IC:/Users/gabri/Desktop/perlin/cmake-build-debug/_deps/raylib-src/src -IC:/Users/gabri/Desktop/perlin/cmake-build-debug/_deps/raylib-src/src/external/glfw/include
   OBJECT_DIR = CMakeFiles\perlin.dir
   OBJECT_FILE_DIR = CMakeFiles\perlin.dir
@@ -68,7 +68,7 @@ build CMakeFiles/perlin.dir/main.c.obj: C_COMPILER__perlin_unscanned_Debug C$:/U
 # Link the executable perlin.exe
 
 build perlin.exe: C_EXECUTABLE_LINKER__perlin_Debug CMakeFiles/perlin.dir/main.c.obj | _deps/raylib-build/raylib/libraylib.a _deps/raylib-build/raylib/external/glfw/src/libglfw3.a || _deps/raylib-build/raylib/external/glfw/src/libglfw3.a _deps/raylib-build/raylib/libraylib.a
-  FLAGS = -g
+  FLAGS = -DGLFW_USE_HYBRID_HPG -g
   LINK_LIBRARIES = _deps/raylib-build/raylib/libraylib.a  -lopengl32  -lglu32  -lwinmm  _deps/raylib-build/raylib/external/glfw/src/libglfw3.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\perlin.dir
   POST_BUILD = cd .
@@ -83,7 +83,7 @@ build perlin.exe: C_EXECUTABLE_LINKER__perlin_Debug CMakeFiles/perlin.dir/main.c
 # Utility command for package
 
 build CMakeFiles/package.util: CUSTOM_COMMAND all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -95,7 +95,7 @@ build package: phony CMakeFiles/package.util
 # Utility command for package_source
 
 build CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -107,7 +107,7 @@ build package_source: phony CMakeFiles/package_source.util
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -118,7 +118,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -136,7 +136,7 @@ build list_install_components: phony
 # Utility command for install
 
 build CMakeFiles/install.util: CUSTOM_COMMAND all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -148,7 +148,7 @@ build install: phony CMakeFiles/install.util
 # Utility command for install/local
 
 build CMakeFiles/install/local.util: CUSTOM_COMMAND all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -160,7 +160,7 @@ build install/local: phony CMakeFiles/install/local.util
 # Utility command for install/strip
 
 build CMakeFiles/install/strip.util: CUSTOM_COMMAND all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
   DESC = Installing the project stripped...
   pool = console
   restat = 1
@@ -183,7 +183,7 @@ build _deps/raylib-build/uninstall: phony _deps/raylib-build/CMakeFiles/uninstal
 # Utility command for package
 
 build _deps/raylib-build/CMakeFiles/package.util: CUSTOM_COMMAND _deps/raylib-build/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -195,7 +195,7 @@ build _deps/raylib-build/package: phony _deps/raylib-build/CMakeFiles/package.ut
 # Utility command for package_source
 
 build _deps/raylib-build/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -207,7 +207,7 @@ build _deps/raylib-build/package_source: phony _deps/raylib-build/CMakeFiles/pac
 # Utility command for edit_cache
 
 build _deps/raylib-build/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -218,7 +218,7 @@ build _deps/raylib-build/edit_cache: phony _deps/raylib-build/CMakeFiles/edit_ca
 # Utility command for rebuild_cache
 
 build _deps/raylib-build/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -236,7 +236,7 @@ build _deps/raylib-build/list_install_components: phony
 # Utility command for install
 
 build _deps/raylib-build/CMakeFiles/install.util: CUSTOM_COMMAND _deps/raylib-build/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -248,7 +248,7 @@ build _deps/raylib-build/install: phony _deps/raylib-build/CMakeFiles/install.ut
 # Utility command for install/local
 
 build _deps/raylib-build/CMakeFiles/install/local.util: CUSTOM_COMMAND _deps/raylib-build/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -260,7 +260,7 @@ build _deps/raylib-build/install/local: phony _deps/raylib-build/CMakeFiles/inst
 # Utility command for install/strip
 
 build _deps/raylib-build/CMakeFiles/install/strip.util: CUSTOM_COMMAND _deps/raylib-build/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
   DESC = Installing the project stripped...
   pool = console
   restat = 1
@@ -272,7 +272,7 @@ build _deps/raylib-build/install/strip: phony _deps/raylib-build/CMakeFiles/inst
 # Custom command for _deps\raylib-build\CMakeFiles\uninstall
 
 build _deps/raylib-build/CMakeFiles/uninstall | ${cmake_ninja_workdir}_deps/raylib-build/CMakeFiles/uninstall: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P C:/Users/gabri/Desktop/perlin/cmake-build-debug/_deps/raylib-build/cmake_uninstall.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P C:/Users/gabri/Desktop/perlin/cmake-build-debug/_deps/raylib-build/cmake_uninstall.cmake"
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -380,7 +380,7 @@ build _deps/raylib-build/raylib/libraylib.a: C_STATIC_LIBRARY_LINKER__raylib_Deb
 # Utility command for package
 
 build _deps/raylib-build/raylib/CMakeFiles/package.util: CUSTOM_COMMAND _deps/raylib-build/raylib/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -392,7 +392,7 @@ build _deps/raylib-build/raylib/package: phony _deps/raylib-build/raylib/CMakeFi
 # Utility command for package_source
 
 build _deps/raylib-build/raylib/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -404,7 +404,7 @@ build _deps/raylib-build/raylib/package_source: phony _deps/raylib-build/raylib/
 # Utility command for edit_cache
 
 build _deps/raylib-build/raylib/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -415,7 +415,7 @@ build _deps/raylib-build/raylib/edit_cache: phony _deps/raylib-build/raylib/CMak
 # Utility command for rebuild_cache
 
 build _deps/raylib-build/raylib/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -433,7 +433,7 @@ build _deps/raylib-build/raylib/list_install_components: phony
 # Utility command for install
 
 build _deps/raylib-build/raylib/CMakeFiles/install.util: CUSTOM_COMMAND _deps/raylib-build/raylib/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -445,7 +445,7 @@ build _deps/raylib-build/raylib/install: phony _deps/raylib-build/raylib/CMakeFi
 # Utility command for install/local
 
 build _deps/raylib-build/raylib/CMakeFiles/install/local.util: CUSTOM_COMMAND _deps/raylib-build/raylib/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -457,7 +457,7 @@ build _deps/raylib-build/raylib/install/local: phony _deps/raylib-build/raylib/C
 # Utility command for install/strip
 
 build _deps/raylib-build/raylib/CMakeFiles/install/strip.util: CUSTOM_COMMAND _deps/raylib-build/raylib/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
   DESC = Installing the project stripped...
   pool = console
   restat = 1
@@ -474,7 +474,7 @@ build _deps/raylib-build/raylib/install/strip: phony _deps/raylib-build/raylib/C
 # Utility command for package
 
 build _deps/raylib-build/raylib/external/glfw/CMakeFiles/package.util: CUSTOM_COMMAND _deps/raylib-build/raylib/external/glfw/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -486,7 +486,7 @@ build _deps/raylib-build/raylib/external/glfw/package: phony _deps/raylib-build/
 # Utility command for package_source
 
 build _deps/raylib-build/raylib/external/glfw/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -498,7 +498,7 @@ build _deps/raylib-build/raylib/external/glfw/package_source: phony _deps/raylib
 # Utility command for edit_cache
 
 build _deps/raylib-build/raylib/external/glfw/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -509,7 +509,7 @@ build _deps/raylib-build/raylib/external/glfw/edit_cache: phony _deps/raylib-bui
 # Utility command for rebuild_cache
 
 build _deps/raylib-build/raylib/external/glfw/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -527,7 +527,7 @@ build _deps/raylib-build/raylib/external/glfw/list_install_components: phony
 # Utility command for install
 
 build _deps/raylib-build/raylib/external/glfw/CMakeFiles/install.util: CUSTOM_COMMAND _deps/raylib-build/raylib/external/glfw/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -539,7 +539,7 @@ build _deps/raylib-build/raylib/external/glfw/install: phony _deps/raylib-build/
 # Utility command for install/local
 
 build _deps/raylib-build/raylib/external/glfw/CMakeFiles/install/local.util: CUSTOM_COMMAND _deps/raylib-build/raylib/external/glfw/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -551,7 +551,7 @@ build _deps/raylib-build/raylib/external/glfw/install/local: phony _deps/raylib-
 # Utility command for install/strip
 
 build _deps/raylib-build/raylib/external/glfw/CMakeFiles/install/strip.util: CUSTOM_COMMAND _deps/raylib-build/raylib/external/glfw/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
   DESC = Installing the project stripped...
   pool = console
   restat = 1
@@ -810,7 +810,7 @@ build _deps/raylib-build/raylib/external/glfw/src/update_mappings: phony _deps/r
 # Utility command for package
 
 build _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/package.util: CUSTOM_COMMAND _deps/raylib-build/raylib/external/glfw/src/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -822,7 +822,7 @@ build _deps/raylib-build/raylib/external/glfw/src/package: phony _deps/raylib-bu
 # Utility command for package_source
 
 build _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/gabri/Desktop/perlin/cmake-build-debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -834,7 +834,7 @@ build _deps/raylib-build/raylib/external/glfw/src/package_source: phony _deps/ra
 # Utility command for edit_cache
 
 build _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -845,7 +845,7 @@ build _deps/raylib-build/raylib/external/glfw/src/edit_cache: phony _deps/raylib
 # Utility command for rebuild_cache
 
 build _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\gabri\Desktop\perlin -BC:\Users\gabri\Desktop\perlin\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -863,7 +863,7 @@ build _deps/raylib-build/raylib/external/glfw/src/list_install_components: phony
 # Utility command for install
 
 build _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/install.util: CUSTOM_COMMAND _deps/raylib-build/raylib/external/glfw/src/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -875,7 +875,7 @@ build _deps/raylib-build/raylib/external/glfw/src/install: phony _deps/raylib-bu
 # Utility command for install/local
 
 build _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/install/local.util: CUSTOM_COMMAND _deps/raylib-build/raylib/external/glfw/src/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -887,7 +887,7 @@ build _deps/raylib-build/raylib/external/glfw/src/install/local: phony _deps/ray
 # Utility command for install/strip
 
 build _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/install/strip.util: CUSTOM_COMMAND _deps/raylib-build/raylib/external/glfw/src/all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-build\raylib\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
   DESC = Installing the project stripped...
   pool = console
   restat = 1
@@ -899,7 +899,7 @@ build _deps/raylib-build/raylib/external/glfw/src/install/strip: phony _deps/ray
 # Custom command for _deps\raylib-build\raylib\external\glfw\src\CMakeFiles\update_mappings
 
 build _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/update_mappings | ${cmake_ninja_workdir}_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/update_mappings: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-src\src\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P C:/Users/gabri/Desktop/perlin/cmake-build-debug/_deps/raylib-src/src/external/glfw/CMake/GenerateMappings.cmake mappings.h.in mappings.h"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\gabri\Desktop\perlin\cmake-build-debug\_deps\raylib-src\src\external\glfw\src && "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -P C:/Users/gabri/Desktop/perlin/cmake-build-debug/_deps/raylib-src/src/external/glfw/CMake/GenerateMappings.cmake mappings.h.in mappings.h"
   DESC = Updating gamepad mappings from upstream repository
 
 # =============================================================================
